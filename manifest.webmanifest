@@ -1,0 +1,9 @@
+{
+  "name": "Nova Versão 2027",
+  "short_name": "Nova Versão",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0b1425",
+  "theme_color": "#10213d",
+  "description": "Diário de evolução, treinos, água e conquistas."
+}

@@ -1,0 +1,28 @@
+NOVA VERSÃO 2027 - pacote inicial
+
+O que está incluído:
+- Painel com contagem regressiva até 20/02/2027
+- Plano semanal de atividades leves e progressivas
+- Checklist diário
+- Registro de água sem impor uma meta universal
+- Diário de conquistas
+- Foto inicial e foto final guardadas localmente
+- Pedido de permissão para notificações
+
+IMPORTANTE SOBRE INSTALAÇÃO:
+Este é um aplicativo web instalável (PWA), não um APK Android.
+Para instalar no Moto G62:
+1. Publique os arquivos em um endereço HTTPS (por exemplo, GitHub Pages).
+2. Abra o endereço no Chrome do Moto G62.
+3. Toque no menu ⋮ e escolha "Instalar app" ou "Adicionar à tela inicial".
+
+LIMITAÇÃO DOS LEMBRETES:
+Os lembretes desta primeira versão funcionam enquanto a página/app está aberta.
+Notificações confiáveis com o app fechado exigem uma implementação Android nativa ou um serviço de notificações push.
+
+PRIVACIDADE:
+Fotos, água e conquistas ficam no armazenamento local do navegador neste aparelho.
+Limpar os dados do navegador pode apagar os registros. Não há envio automático para servidor.
+
+SEGURANÇA:
+O app não ensina mortal. Acrobacias devem ser aprendidas presencialmente com professor qualificado.

@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#10213d">
+<meta name="description" content="Seu diário de evolução até 20 de fevereiro de 2027.">
+<link rel="manifest" href="manifest.webmanifest">
+<title>Nova Versão 2027</title>
+<style>
+:root{--bg:#0b1425;--panel:#14243d;--panel2:#1c3150;--text:#f5f8ff;--muted:#b6c5da;--blue:#64a8ff;--green:#61d6a2;--line:#2c4261}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(160deg,#0b1425,#132744);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+main{max-width:760px;margin:auto;padding:18px 15px 44px}.top{display:flex;align-items:center;justify-content:space-between;gap:10px}.brand{font-size:13px;letter-spacing:2px;color:#a9cfff;font-weight:800}.pill{font-size:12px;background:#193d3a;color:#9af0c9;border:1px solid #2d6a58;padding:6px 10px;border-radius:99px}
+h1{font-size:30px;line-height:1.1;margin:18px 0 6px}p{color:var(--muted);line-height:1.5}.count{margin:18px 0;background:linear-gradient(120deg,#1a3b68,#1a3150);border:1px solid #34577f;border-radius:20px;padding:18px;display:flex;align-items:center;justify-content:space-between;gap:10px}.count strong{font-size:38px;display:block}.count small{color:#c6d9f1}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:15px;margin:12px 0}.card h2{font-size:17px;margin:0 0 10px}.muted{color:var(--muted);font-size:13px}.workout{background:var(--panel2);border-radius:13px;padding:13px;margin:8px 0}.workout b{display:block;margin-bottom:4px}.tag{font-size:11px;color:#bcd9ff;background:#203e62;padding:4px 8px;border-radius:99px;display:inline-block;margin-bottom:7px}
+button,.filelabel{background:#2c65a5;color:white;border:0;padding:11px 13px;border-radius:11px;font-weight:700;cursor:pointer;font-size:14px}button.secondary{background:#263b56;border:1px solid #456080}button.green{background:#16744f}button:disabled{opacity:.5}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.row>*{flex:1}.task{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line)}.task:last-child{border:0}.task input{width:19px;height:19px;accent-color:#61d6a2;margin-top:2px}.task span{line-height:1.35}.progress{height:9px;background:#263a55;border-radius:99px;overflow:hidden;margin:10px 0}.progress i{height:100%;display:block;background:var(--green);width:0}
+input[type=number],input[type=time]{width:100%;background:#0e1c30;color:white;border:1px solid #405775;border-radius:10px;padding:10px;font-size:16px}
+.photo{width:100%;max-height:240px;object-fit:contain;background:#0e1c30;border-radius:12px;margin-top:10px}.photo-slot{border:1px dashed #527096;border-radius:13px;padding:13px;text-align:center;margin-top:10px}.photo-slot input{max-width:100%;margin-top:8px}.foot{font-size:12px;color:#9fb0c8;text-align:center;margin-top:24px}.notice{font-size:12px;color:#c7d7ec;background:#182b45;border-left:3px solid #64a8ff;padding:10px;border-radius:8px;line-height:1.5}
+@media(max-width:480px){h1{font-size:26px}.count strong{font-size:32px}.grid{gap:8px}.card{padding:13px}}
+</style>
+</head>
+<body>
+<main>
+ <div class="top"><div class="brand">✦ NOVA VERSÃO 2027</div><span class="pill">MINHA JORNADA</span></div>
+ <h1>Um dia de cada vez. 🚀</h1>
+ <p id="todayText">Seu painel de evolução.</p>
+ <section class="count">
+   <div><small>FALTAM PARA 20/02/2027</small><strong id="days">90 dias</strong><small>O destino é uma data. A evolução é diária.</small></div>
+   <div style="font-size:42px">💙</div>
+ </section>
+
+ <div class="grid">
+  <section class="card"><div class="muted">TREINO DE HOJE</div><h2 id="planTitle">Descanso e recuperação</h2><div class="muted" id="planTime">Hoje: ritmo leve</div></section>
+  <section class="card"><div class="muted">ÁGUA REGISTRADA</div><h2><span id="waterTotal">0</span> ml</h2><div class="muted">Registre ao longo do dia</div></section>
+ </div>
+
+ <section class="card">
+  <h2>☑️ Missões de hoje</h2>
+  <div id="tasks"></div>
+  <div class="progress"><i id="progressBar"></i></div>
+  <div class="muted" id="progressText">0 de 5 concluídas</div>
+ </section>
+
+ <section class="card">
+  <h2>💧 Meu controle de água</h2>
+  <p class="muted">Some o que você bebeu. A necessidade varia com idade, clima e atividade. Não force água para bater um número.</p>
+  <div class="row">
+   <button onclick="addWater(150)">+150 ml</button><button onclick="addWater(250)">+250 ml</button><button class="secondary" onclick="addWater(500)">+500 ml</button>
+  </div>
+  <div class="row" style="margin-top:9px"><button class="secondary" onclick="resetWater()">Zerar registro de hoje</button></div>
+ </section>
+
+ <section class="card">
+  <h2>⏰ Lembretes</h2>
+  <p class="muted">Ative as notificações e escolha horários. No navegador, os lembretes funcionam enquanto o app estiver aberto. Para alertas confiáveis com o app fechado, será necessária uma versão Android nativa ou serviço de notificações.</p>
+  <div class="row"><label class="muted">Lembrete 1<input id="time1" type="time" value="16:30"></label><label class="muted">Lembrete 2<input id="time2" type="time" value="19:00"></label></div>
+  <div class="row" style="margin-top:10px"><button onclick="enableReminders()">Ativar lembretes</button><button class="secondary" onclick="testNotice()">Testar aviso</button></div>
+  <div class="muted" id="noticeStatus" style="margin-top:8px">Notificações ainda não ativadas.</div>
+ </section>
+
+ <section class="card">
+  <h2>📸 Minha jornada em fotos</h2>
+  <p class="muted">Registre uma foto no começo e outra no dia 20/02/2027. Elas ficam guardadas apenas neste aparelho. Use as fotos como lembrança, sem comparação ou cobrança sobre o corpo.</p>
+  <div class="photo-slot"><b>Foto inicial · 22/11/2026</b><br><input id="beforeInput" type="file" accept="image/*" capture="user"><img id="beforeImg" class="photo" hidden></div>
+  <div class="photo-slot"><b>Foto final · 20/02/2027</b><br><input id="afterInput" type="file" accept="image/*" capture="user"><img id="afterImg" class="photo" hidden></div>
+  <div class="notice" style="margin-top:12px">Privacidade: as imagens são armazenadas localmente no navegador deste celular. Se limpar os dados do navegador, elas podem ser apagadas. Não envie fotos íntimas ou informações pessoais.</div>
+ </section>
+
+ <section class="card">
+  <h2>🏅 Minhas conquistas</h2>
+  <textarea id="wins" placeholder="Escreva uma coisa de que você se orgulhou hoje..." style="width:100%;min-height:90px;background:#0e1c30;color:white;border:1px solid #405775;border-radius:10px;padding:10px;font:inherit"></textarea>
+  <button style="margin-top:8px" onclick="saveWins()">Salvar conquista</button>
+  <div class="muted" id="winsStatus" style="margin-top:7px"></div>
+ </section>
+
+ <section class="card">
+  <h2>⚠️ Treino seguro</h2>
+  <p class="muted">O plano trabalha força geral, mobilidade, coordenação e fundamentos da capoeira. Mortal para trás, Flick Flack e outras acrobacias devem ser aprendidos presencialmente com professor qualificado, em local e equipamento adequados. Não tente sozinho.</p>
+  <p class="muted">Não há meta de emagrecimento ou dieta restritiva. Foque em saúde, alimentação variada, descanso e desenvolvimento de força.</p>
+ </section>
+ <div class="foot">NOVA VERSÃO 2027 · Seus registros ficam neste aparelho.</div>
+</main>
+<script>
+const END = new Date('2027-02-20T00:00:00');
+const dayNames=['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'];
+const plans=[
+ {title:'Descanso e recuperação',time:'15 a 20 min leves',tasks:['Fazer mobilidade confortável','Dar uma caminhada leve, se quiser','Cuidar da higiene e aparência','Registrar uma conquista','Descansar e dormir bem']},
+ {title:'Força geral A',time:'25 a 35 min',tasks:['Aquecimento leve por 5 min','Agachamento confortável: 2×8 a 10','Flexão na parede ou apoio alto: 2×6 a 8','Ponte de glúteos: 2×10','Alongamento leve e recuperação']},
+ {title:'Mobilidade e capoeira',time:'20 a 30 min',tasks:['Aquecimento leve','Mobilidade de quadril e tornozelos','Treinar ginga e fundamentos sem acrobacias','Equilíbrio com apoio próximo','Relaxar e recuperar']},
+ {title:'Força geral B',time:'25 a 35 min',tasks:['Aquecimento leve por 5 min','Sentar e levantar de uma cadeira: 2×8 a 10','Flexão na parede: 2×6 a 8','Bird-dog: 2×6 por lado','Respiração e recuperação']},
+ {title:'Caminhada e coordenação',time:'20 a 30 min',tasks:['Caminhada em ritmo confortável','Movimentos básicos de coordenação','Mobilidade leve','Cuidar da higiene e aparência','Descansar']},
+ {title:'Força geral C',time:'25 a 35 min',tasks:['Aquecimento leve por 5 min','Agachamento confortável: 2×8 a 10','Ponte de glúteos: 2×10','Elevação de panturrilha com apoio: 2×10','Relaxar e recuperar']},
+ {title:'Capoeira ou recuperação',time:'Conforme aula, sem forçar',tasks:['Participar da aula com orientação','Praticar fundamentos seguros','Evitar acrobacias sem professor','Hidratar-se conforme sede','Descansar depois da atividade']}
+];
+const now = new Date();
+document.getElementById('todayText').textContent = now.toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+function updateDays(){let n=Math.max(0,Math.ceil((new Date(END.toDateString())-new Date(new Date().toDateString()))/86400000));document.getElementById('days').textContent=n===1?'1 dia':n+' dias';}
+updateDays();
+const todayKey=()=>new Date().toISOString().slice(0,10);
+let state=JSON.parse(localStorage.getItem('nv_state')||'{}');
+if(state.date!==todayKey()){state={date:todayKey(),water:0,checks:[]};saveState();}
+function saveState(){localStorage.setItem('nv_state',JSON.stringify(state));}
+function renderPlan(){
+ let d=new Date().getDay(),p=plans[d];
+ document.getElementById('planTitle').textContent=p.title;
+ document.getElementById('planTime').textContent=p.time;
+ document.getElementById('tasks').innerHTML=p.tasks.map((t,i)=>`<label class="task"><input type="checkbox" ${state.checks.includes(i)?'checked':''} onchange="toggleTask(${i},this.checked)"><span>${t}</span></label>`).join('');
+ updateProgress();
+}
+function toggleTask(i,v){state.checks=state.checks.filter(x=>x!==i);if(v)state.checks.push(i);saveState();updateProgress();}
+function updateProgress(){let n=state.checks.length,total=plans[new Date().getDay()].tasks.length;document.getElementById('progressBar').style.width=(n/total*100)+'%';document.getElementById('progressText').textContent=`${n} de ${total} concluídas`;}
+function renderWater(){document.getElementById('waterTotal').textContent=state.water||0;}
+function addWater(n){state.water=(state.water||0)+n;saveState();renderWater();}
+function resetWater(){state.water=0;saveState();renderWater();}
+renderPlan();renderWater();
+
+function testNotice(){
+ if(!('Notification' in window)){document.getElementById('noticeStatus').textContent='Este navegador não oferece notificações.';return;}
+ Notification.requestPermission().then(p=>{if(p==='granted'){new Notification('Nova Versão 2027',{body:'Seu lembrete de teste está funcionando! 💙'});document.getElementById('noticeStatus').textContent='Aviso de teste enviado.';}else document.getElementById('noticeStatus').textContent='Permissão não concedida.';});
+}
+let reminderTimer=null;
+function enableReminders(){
+ if(!('Notification' in window)){document.getElementById('noticeStatus').textContent='Notificações não suportadas neste navegador.';return;}
+ Notification.requestPermission().then(p=>{
+  if(p!=='granted'){document.getElementById('noticeStatus').textContent='Permita notificações nas configurações do navegador.';return;}
+  if(reminderTimer)clearInterval(reminderTimer);
+  const t1=document.getElementById('time1').value,t2=document.getElementById('time2').value;
+  let fired={};
+  reminderTimer=setInterval(()=>{
+   let d=new Date(),hm=d.toTimeString().slice(0,5),key=d.toDateString()+hm;
+   if((hm===t1||hm===t2)&&!fired[key]){fired[key]=true;new Notification('Nova Versão 2027',{body:'Confira sua missão de hoje e faça uma pausa para beber água, se estiver com sede. 💧'});}
+  },15000);
+  document.getElementById('noticeStatus').textContent='Lembretes ativos enquanto esta página estiver aberta. Horários: '+t1+' e '+t2+'.';
+ });
+}
+function loadPhoto(inputId,imgId,key){
+ const input=document.getElementById(inputId),img=document.getElementById(imgId);
+ const saved=localStorage.getItem(key);if(saved){img.src=saved;img.hidden=false;}
+ input.addEventListener('change',()=>{const f=input.files[0];if(!f)return;if(f.size>5*1024*1024){alert('Escolha uma foto de até 5 MB.');return;}const r=new FileReader();r.onload=()=>{try{localStorage.setItem(key,r.result);img.src=r.result;img.hidden=false;}catch(e){alert('Não foi possível guardar a foto. Tente uma imagem menor.');}};r.readAsDataURL(f);});
+}
+loadPhoto('beforeInput','beforeImg','nv_before');loadPhoto('afterInput','afterImg','nv_after');
+document.getElementById('wins').value=localStorage.getItem('nv_wins')||'';
+function saveWins(){localStorage.setItem('nv_wins',document.getElementById('wins').value);document.getElementById('winsStatus').textContent='Conquista salva neste aparelho. 💙';}
+if('serviceWorker' in navigator && location.protocol.startsWith('http')){navigator.serviceWorker.register('./sw.js').catch(()=>{});}
+</script>
+</body></html>
