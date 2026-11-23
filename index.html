@@ -142,5 +142,17 @@ loadPhoto('beforeInput','beforeImg','nv_before');loadPhoto('afterInput','afterIm
 document.getElementById('wins').value=localStorage.getItem('nv_wins')||'';
 function saveWins(){localStorage.setItem('nv_wins',document.getElementById('wins').value);document.getElementById('winsStatus').textContent='Conquista salva neste aparelho. 💙';}
 if('serviceWorker' in navigator && location.protocol.startsWith('http')){navigator.serviceWorker.register('./sw.js').catch(()=>{});}
+</script><script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('./sw.js')
+      .then(function() {
+        console.log('Service Worker registrado!');
+      })
+      .catch(function(error) {
+        console.error('Erro:', error);
+      });
+  });
+}
 </script>
 </body></html>
